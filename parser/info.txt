@@ -1,0 +1,6 @@
+206
+
+Hiragana: Unicode: 3040-309F
+Katakana: Unicode: 30A0–30FF
+
+ 4E00~9FFF
