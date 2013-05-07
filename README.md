@@ -1,6 +1,6 @@
 YAJAD
 =====
 
-Yet another Japanese- [anything] [1] dictionary
+Yet another Japanese-anything dictionary
 
-[1]: Note: anything means Russian
+Note: anything means Russian
