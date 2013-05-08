@@ -16,8 +16,8 @@
 *.pro.user.*
 moc_*.cpp
 qrc_*.cpp
-Makefile
-*-build-*
+build-yajad_qt*
+yajad_qt/Makefile
 
 # emacs autobackups
 *~
