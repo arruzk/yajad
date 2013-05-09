@@ -18,6 +18,7 @@ moc_*.cpp
 qrc_*.cpp
 build-yajad_qt*
 yajad_qt/Makefile
+*-build-g-*
 
 # emacs autobackups
 *~
