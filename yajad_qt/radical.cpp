@@ -6,7 +6,7 @@ radical::radical(QWidget *parent) :
     ui(new Ui::radical)
 {
     ui->setupUi(this);
-    createDbConnection();
+//    createDbConnection();
     initRadicalList();
     connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearHierogliphList()));
 }

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "sqlitesearcher.hpp"
+#include "radical.h"
 
 namespace Ui {
 class MainWindow;
@@ -15,10 +16,12 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    
+private slots:
+    void openRadicalWindow();
 private:
     Ui::MainWindow *ui;
     sqliteSearcher *sqliteSearch;
+    radical *radicalWindow;
 };
 
 #endif // MAINWINDOW_HPP

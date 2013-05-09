@@ -12,9 +12,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->searchButton, SIGNAL(clicked()),
             this->sqliteSearch, SLOT(search()));
+
+    connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::openRadicalWindow(){
+    radicalWindow = new radical;
+    radicalWindow->show();
 }
