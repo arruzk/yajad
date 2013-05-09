@@ -15,13 +15,13 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     sqlitesearcher.cpp \
-    databasemanager.cpp
-	radical.cpp
+    databasemanager.cpp \
+    radical.cpp
 
 HEADERS  += mainwindow.hpp \
     sqlitesearcher.hpp \
-    databasemanager.hpp
-	radical.h
+    databasemanager.hpp \
+    radical.h
 
 FORMS    += mainwindow.ui \
     radical.ui
