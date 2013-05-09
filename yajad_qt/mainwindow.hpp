@@ -2,6 +2,7 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include "sqlitesearcher.hpp"
 
 namespace Ui {
 class MainWindow;
@@ -17,6 +18,7 @@ public:
     
 private:
     Ui::MainWindow *ui;
+    sqliteSearcher *sqliteSearch;
 };
 
 #endif // MAINWINDOW_HPP
