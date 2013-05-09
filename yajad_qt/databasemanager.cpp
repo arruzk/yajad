@@ -15,7 +15,7 @@ bool databaseManager::openDB(QString path)
     db.setDatabaseName(path);
 #else
     // NOTE: File exists in the application private folder, in Symbian Qt implementation
-    db.setDatabaseName("my.db.sqlite");
+    db.setDatabaseName(path);
 #endif
 
     return db.open();
