@@ -112,7 +112,7 @@ void radical::updateHieroglyph(){
         zz<<hieroglyphs[tt];
     }
     ui->textEdit->setPlainText(zz.join(QString(" ")));
-//    updateRadical();
+    updateRadical();
 }
 
 void radical::clearHierogliphList(){
