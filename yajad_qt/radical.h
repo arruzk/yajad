@@ -20,7 +20,6 @@ public:
     ~radical();
     
 private:
-    int createDbConnection();
     int initRadicalList();
     void updateRadical();
     void updateHieroglyph();
