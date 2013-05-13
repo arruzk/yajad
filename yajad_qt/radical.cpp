@@ -16,16 +16,6 @@ radical::~radical()
     delete ui;
 }
 
-int radical::createDbConnection(){
-    dbase = QSqlDatabase::addDatabase("QSQLITE");
-    dbase.setDatabaseName("../parser/dict.sqlite");
-    if (!dbase.open()) {
-        qDebug() << "db connection fail";
-        return -1;
-    }
-    return 0;
-}
-
 int radical::initRadicalList(){
     QSqlQuery query;
     if(!query.exec("SELECT * FROM radical")){
@@ -42,11 +32,12 @@ int radical::initRadicalList(){
         character = query.value(rec.indexOf("character")).toString();
 //        rgroup = query.value(rec.indexOf("rgroup")).toInt();
         QPushButton *t = new QPushButton(character);
+        t->setMinimumWidth(5);
         radicals.insert(id, t);
         ui->gridLayout_2->addWidget(radicals[id], row, column);
         connect(radicals[id], SIGNAL(clicked()), SLOT(radicalSelect()));
         column++;
-        if(column%12 == 0){
+        if(column%20 == 0){
             row++;
             column = 0;
         }
@@ -65,23 +56,23 @@ void radical::updateRadical(){
     QSqlQuery my_query;
     QHash<int, QString> hieroglyphs;
     availableRadicals.clear();
-    foreach (const int &curHierogliphId, availableHieroglyph){
-//        qDebug()<<curHierogliphId;
-//        int curHierogliphId = 12580;
-        QString query = QString("SELECT R.id FROM hieroglyph H JOIN hieroglyphRadical ON H.id = hieroglyph_id "
-                            "JOIN radical R ON R.id = radical_id WHERE H.id = %1")
-                                  .arg(curHierogliphId);
+    foreach (const int &curRadicalId, inputRadical){
+        QString query = QString("SELECT DISTINCT HR2.radical_id AS r22 FROM radical R "
+                                "JOIN hieroglyphRadical HR1 ON R.id = HR1.radical_id "
+                                "JOIN hieroglyph H ON H.id = HR1.hieroglyph_id "
+                                "JOIN hieroglyphRadical HR2 ON HR2.hieroglyph_id = H.id WHERE R.id = %1")
+                                  .arg(curRadicalId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
+//        qDebug()<<my_query.lastQuery();
         QSqlRecord rec = my_query.record();
-//        QSet<int> temp;
         int id;
         while(my_query.next()){
-            id = my_query.value(rec.indexOf("id")).toInt();
+            id = my_query.value(rec.indexOf("r22")).toInt();
             availableRadicals.insert(id);
-//            temp<<id;
         }
     }
+    qDebug()<<availableRadicals;
     foreach(const int &highlight, availableRadicals){
 //        qDebug()<<highlight;
 //        radicals[highlight]->setText("!");
@@ -126,7 +117,6 @@ void radical::updateHieroglyph(){
 
 void radical::clearHierogliphList(){
     inputRadical.clear();
-    qDebug()<<"clear";
     foreach(QPushButton *curButton, radicals){
         curButton->setDisabled(false);
     }
