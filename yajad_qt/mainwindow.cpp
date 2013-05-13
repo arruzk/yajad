@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
             this->sqliteSearch, SLOT(search()));
 
     connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
+
+    openRadicalWindow();
 }
 
 MainWindow::~MainWindow()
@@ -22,6 +24,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::openRadicalWindow(){
-    radicalWindow = new radical;
+    radicalWindow = new radical();
     radicalWindow->show();
 }
