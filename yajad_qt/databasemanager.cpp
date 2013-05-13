@@ -28,7 +28,7 @@ QSqlError databaseManager::lastError()
     return db.lastError().text();
 }
 
-bool databaseManager::closeDB()
+void databaseManager::closeDB()
 {
     // Close database
     db.close();

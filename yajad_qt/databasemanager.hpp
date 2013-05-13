@@ -16,7 +16,7 @@ public:
     
 public:
     bool openDB(QString path);
-    bool closeDB();
+    void closeDB();
     QSqlError lastError();
 
 private:

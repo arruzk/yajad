@@ -6,7 +6,7 @@ radical::radical(QWidget *parent) :
     ui(new Ui::radical)
 {
     ui->setupUi(this);
-//    createDbConnection();
+    //    createDbConnection();
     initRadicalList();
     connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearHierogliphList()));
 }
@@ -34,13 +34,13 @@ int radical::initRadicalList(){
     }
     QSqlRecord rec = query.record();
     int id;
-//    int rgroup;
+    //    int rgroup;
     QString character;
     int column = 0, row = 0;
     while (query.next()) {
         id = query.value(rec.indexOf("id")).toInt();
         character = query.value(rec.indexOf("character")).toString();
-//        rgroup = query.value(rec.indexOf("rgroup")).toInt();
+        //        rgroup = query.value(rec.indexOf("rgroup")).toInt();
         QPushButton *t = new QPushButton(character);
         radicals.insert(id, t);
         ui->gridLayout_2->addWidget(radicals[id], row, column);
@@ -66,25 +66,25 @@ void radical::updateRadical(){
     QHash<int, QString> hieroglyphs;
     availableRadicals.clear();
     foreach (const int &curHierogliphId, availableHieroglyph){
-//        qDebug()<<curHierogliphId;
-//        int curHierogliphId = 12580;
+        //        qDebug()<<curHierogliphId;
+        //        int curHierogliphId = 12580;
         QString query = QString("SELECT R.id FROM hieroglyph H JOIN hieroglyphRadical ON H.id = hieroglyph_id "
-                            "JOIN radical R ON R.id = radical_id WHERE H.id = %1")
-                                  .arg(curHierogliphId);
+                                "JOIN radical R ON R.id = radical_id WHERE H.id = %1")
+                .arg(curHierogliphId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
         QSqlRecord rec = my_query.record();
-//        QSet<int> temp;
+        //        QSet<int> temp;
         int id;
         while(my_query.next()){
             id = my_query.value(rec.indexOf("id")).toInt();
             availableRadicals.insert(id);
-//            temp<<id;
+            //            temp<<id;
         }
     }
     foreach(const int &highlight, availableRadicals){
-//        qDebug()<<highlight;
-//        radicals[highlight]->setText("!");
+        //        qDebug()<<highlight;
+        //        radicals[highlight]->setText("!");
 
         QPalette myPalette = radicals[highlight]->palette();
         myPalette.setColor( QPalette::Button, QColor(6,127,34) );
@@ -99,8 +99,8 @@ void radical::updateHieroglyph(){
     availableHieroglyph.clear();
     foreach (const int &curRadicalId, inputRadical){
         QString query = QString("SELECT H.id, H.character FROM radical R JOIN hieroglyphRadical ON R.id = radical_id "
-                            "JOIN hieroglyph H ON H.id = hieroglyph_id WHERE R.id = %1")
-                                  .arg(curRadicalId);
+                                "JOIN hieroglyph H ON H.id = hieroglyph_id WHERE R.id = %1")
+                .arg(curRadicalId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
         QSqlRecord rec = my_query.record();
@@ -121,7 +121,7 @@ void radical::updateHieroglyph(){
         zz<<hieroglyphs[tt];
     }
     ui->textEdit->setPlainText(zz.join(QString(" ")));
-//    updateRadical();
+    //    updateRadical();
 }
 
 void radical::clearHierogliphList(){
