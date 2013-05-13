@@ -31,6 +31,7 @@ private:
     QSet<int> availableRadicals;
 public slots:
     void clearHierogliphList();
+    void clearColor();
 private slots:
     void radicalSelect();
 };

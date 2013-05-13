@@ -64,19 +64,21 @@ void radical::updateRadical(){
                                   .arg(curRadicalId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
-//        qDebug()<<my_query.lastQuery();
         QSqlRecord rec = my_query.record();
         int id;
+        QSet<int> temp;
         while(my_query.next()){
             id = my_query.value(rec.indexOf("r22")).toInt();
-            availableRadicals.insert(id);
+            temp.insert(id);
         }
+        if(availableRadicals.isEmpty())
+            availableRadicals = temp;
+        else
+            availableRadicals.intersect(temp);
     }
     qDebug()<<availableRadicals;
+    clearColor();
     foreach(const int &highlight, availableRadicals){
-//        qDebug()<<highlight;
-//        radicals[highlight]->setText("!");
-
         QPalette myPalette = radicals[highlight]->palette();
         myPalette.setColor( QPalette::Button, QColor(6,127,34) );
         radicals[highlight]->setPalette( myPalette );
@@ -119,5 +121,12 @@ void radical::clearHierogliphList(){
     inputRadical.clear();
     foreach(QPushButton *curButton, radicals){
         curButton->setDisabled(false);
+    }
+    clearColor();
+}
+
+void radical::clearColor(){
+    foreach(QPushButton *curButton, radicals){
+        curButton->setAutoFillBackground(false);
     }
 }
