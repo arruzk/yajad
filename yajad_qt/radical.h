@@ -22,15 +22,15 @@ public:
 private:
     int initRadicalList();
     void updateRadical();
-    void updateHieroglyph();
+    void updateKanji();
     Ui::radical *ui;
     QHash <int, QPushButton* > radicals;
     QSqlDatabase dbase;
     QSet<int> inputRadical;
-    QSet<int> availableHieroglyph;
+    QSet<int> availableKanji;
     QSet<int> availableRadicals;
 public slots:
-    void clearHierogliphList();
+    void clearKanjiList();
     void clearColor();
 private slots:
     void radicalSelect();

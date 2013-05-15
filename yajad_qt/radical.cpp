@@ -6,7 +6,6 @@ radical::radical(QWidget *parent) :
     ui(new Ui::radical)
 {
     ui->setupUi(this);
-//    createDbConnection();
     initRadicalList();
     connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearHierogliphList()));
 }
@@ -49,18 +48,17 @@ void radical::radicalSelect(){
     int radicalId = radicals.key(curButton);
     inputRadical<<radicalId;
     curButton->setDisabled(true);
-    updateHieroglyph();
+    updateKanji();
 }
 
 void radical::updateRadical(){
     QSqlQuery my_query;
-    QHash<int, QString> hieroglyphs;
     availableRadicals.clear();
     foreach (const int &curRadicalId, inputRadical){
         QString query = QString("SELECT DISTINCT HR2.radical_id AS r22 FROM radical R "
-                                "JOIN hieroglyphRadical HR1 ON R.id = HR1.radical_id "
-                                "JOIN hieroglyph H ON H.id = HR1.hieroglyph_id "
-                                "JOIN hieroglyphRadical HR2 ON HR2.hieroglyph_id = H.id WHERE R.id = %1")
+                                "JOIN kanjiRadical HR1 ON R.id = HR1.radical_id "
+                                "JOIN kanji H ON H.id = HR1.kanji_id "
+                                "JOIN kanjiRadical HR2 ON HR2.kanji_id = H.id WHERE R.id = %1")
                                   .arg(curRadicalId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
@@ -86,13 +84,13 @@ void radical::updateRadical(){
     }
 }
 
-void radical::updateHieroglyph(){
+void radical::updateKanji(){
     QSqlQuery my_query;
     QHash<int, QString> hieroglyphs;
-    availableHieroglyph.clear();
+    availableKanji.clear();
     foreach (const int &curRadicalId, inputRadical){
-        QString query = QString("SELECT H.id, H.character FROM radical R JOIN hieroglyphRadical ON R.id = radical_id "
-                            "JOIN hieroglyph H ON H.id = hieroglyph_id WHERE R.id = %1")
+        QString query = QString("SELECT H.id, H.character FROM radical R JOIN kanjiRadical ON R.id = radical_id "
+                            "JOIN kanji H ON H.id = kanji_id WHERE R.id = %1")
                                   .arg(curRadicalId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
@@ -104,20 +102,20 @@ void radical::updateHieroglyph(){
             hieroglyphs[id] = my_query.value(rec.indexOf("character")).toString();
             temp<<id;
         }
-        if(availableHieroglyph.isEmpty())
-            availableHieroglyph = temp;
+        if(availableKanji.isEmpty())
+            availableKanji = temp;
         else
-            availableHieroglyph.intersect(temp);
+            availableKanji.intersect(temp);
     }
     QStringList zz;
-    foreach(const int &tt, availableHieroglyph){
+    foreach(const int &tt, availableKanji){
         zz<<hieroglyphs[tt];
     }
     ui->textEdit->setPlainText(zz.join(QString(" ")));
     updateRadical();
 }
 
-void radical::clearHierogliphList(){
+void radical::clearKanjiList(){
     inputRadical.clear();
     foreach(QPushButton *curButton, radicals){
         curButton->setDisabled(false);
