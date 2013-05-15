@@ -7,7 +7,7 @@ radical::radical(QWidget *parent) :
 {
     ui->setupUi(this);
     initRadicalList();
-    connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearHierogliphList()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearKanjiList()));
 }
 
 radical::~radical()
@@ -55,7 +55,7 @@ void radical::updateRadical(){
     QSqlQuery my_query;
     availableRadicals.clear();
     foreach (const int &curRadicalId, inputRadical){
-        QString query = QString("SELECT DISTINCT HR2.radical_id AS r22 FROM radical R "
+        QString query = QString("SELECT DISTINCT HR2.radical_id AS myRadical FROM radical R "
                                 "JOIN kanjiRadical HR1 ON R.id = HR1.radical_id "
                                 "JOIN kanji H ON H.id = HR1.kanji_id "
                                 "JOIN kanjiRadical HR2 ON HR2.kanji_id = H.id WHERE R.id = %1")
@@ -66,15 +66,15 @@ void radical::updateRadical(){
         int id;
         QSet<int> temp;
         while(my_query.next()){
-            id = my_query.value(rec.indexOf("r22")).toInt();
+            id = my_query.value(rec.indexOf("myRadical")).toInt();
             temp.insert(id);
         }
+        qDebug()<<temp;
         if(availableRadicals.isEmpty())
             availableRadicals = temp;
         else
             availableRadicals.intersect(temp);
     }
-    qDebug()<<availableRadicals;
     clearColor();
     foreach(const int &highlight, availableRadicals){
         QPalette myPalette = radicals[highlight]->palette();
@@ -89,8 +89,9 @@ void radical::updateKanji(){
     QHash<int, QString> hieroglyphs;
     availableKanji.clear();
     foreach (const int &curRadicalId, inputRadical){
-        QString query = QString("SELECT H.id, H.character FROM radical R JOIN kanjiRadical ON R.id = radical_id "
-                            "JOIN kanji H ON H.id = kanji_id WHERE R.id = %1")
+        QString query = QString("SELECT H.id, H.character FROM radical R "
+                                "JOIN kanjiRadical ON R.id = radical_id "
+                                "JOIN kanji H ON H.id = kanji_id WHERE R.id = %1")
                                   .arg(curRadicalId);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
