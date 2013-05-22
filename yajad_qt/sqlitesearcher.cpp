@@ -43,112 +43,118 @@ QString sqliteSearcher::convertToKana(QString req)
     e = QRegExp("кэ"); res.replace(e,"け");
     e = QRegExp("ко"); res.replace(e,"こ");
 
-    e = QRegExp("са"); res = res.replace(e,"さ");
-    e = QRegExp("си"); res = res.replace(e,"し");
-    e = QRegExp("су"); res = res.replace(e,"す");
-    e = QRegExp("сэ"); res = res.replace(e,"せ");
-    e = QRegExp("со"); res = res.replace(e,"そ");
+    e = QRegExp("га"); res.replace(e,"が");
+    e = QRegExp("ги"); res.replace(e,"ぎ");
+    e = QRegExp("гу"); res.replace(e,"ぐ");
+    e = QRegExp("гэ"); res.replace(e,"げ");
+    e = QRegExp("го"); res.replace(e,"ご");
 
-    e = QRegExp("дза"); res = res.replace(e,"ざ");
-    e = QRegExp("дзи"); res = res.replace(e,"じ");
-    e = QRegExp("дзу"); res = res.replace(e,"ず");
-    e = QRegExp("дзэ"); res = res.replace(e,"ぜ");
-    e = QRegExp("дзо"); res = res.replace(e,"ぞ");
+    e = QRegExp("са"); res.replace(e,"さ");
+    e = QRegExp("си"); res.replace(e,"し");
+    e = QRegExp("су"); res.replace(e,"す");
+    e = QRegExp("сэ"); res.replace(e,"せ");
+    e = QRegExp("со"); res.replace(e,"そ");
 
-    e = QRegExp("та"); res = res.replace(e,"た");
-    e = QRegExp("ти"); res = res.replace(e,"ち");
-    e = QRegExp("цу"); res = res.replace(e,"つ");
-    e = QRegExp("тэ"); res = res.replace(e,"て");
-    e = QRegExp("то"); res = res.replace(e,"と");
+    e = QRegExp("дза"); res.replace(e,"ざ");
+    e = QRegExp("дзи"); res.replace(e,"じ");
+    e = QRegExp("дзу"); res.replace(e,"ず");
+    e = QRegExp("дзэ"); res.replace(e,"ぜ");
+    e = QRegExp("дзо"); res.replace(e,"ぞ");
 
-    e = QRegExp("да"); res = res.replace(e,"だ");
-    e = QRegExp("дэ"); res = res.replace(e,"で");
-    e = QRegExp("до"); res = res.replace(e,"ど");
+    e = QRegExp("та"); res.replace(e,"た");
+    e = QRegExp("ти"); res.replace(e,"ち");
+    e = QRegExp("цу"); res.replace(e,"つ");
+    e = QRegExp("тэ"); res.replace(e,"て");
+    e = QRegExp("то"); res.replace(e,"と");
 
-    e = QRegExp("на"); res = res.replace(e,"な");
-    e = QRegExp("ни"); res = res.replace(e,"に");
-    e = QRegExp("ну"); res = res.replace(e,"ぬ");
-    e = QRegExp("нэ"); res = res.replace(e,"ね");
-    e = QRegExp("но"); res = res.replace(e,"の");
+    e = QRegExp("да"); res.replace(e,"だ");
+    e = QRegExp("дэ"); res.replace(e,"で");
+    e = QRegExp("до"); res.replace(e,"ど");
 
-    e = QRegExp("ха"); res = res.replace(e,"は");
-    e = QRegExp("хи"); res = res.replace(e,"ひ");
-    e = QRegExp("фу"); res = res.replace(e,"ふ");
-    e = QRegExp("хэ"); res = res.replace(e,"へ");
-    e = QRegExp("хо"); res = res.replace(e,"ほ");
+    e = QRegExp("на"); res.replace(e,"な");
+    e = QRegExp("ни"); res.replace(e,"に");
+    e = QRegExp("ну"); res.replace(e,"ぬ");
+    e = QRegExp("нэ"); res.replace(e,"ね");
+    e = QRegExp("но"); res.replace(e,"の");
 
-    e = QRegExp("ба"); res = res.replace(e,"ば");
-    e = QRegExp("би"); res = res.replace(e,"び");
-    e = QRegExp("бу"); res = res.replace(e,"ぶ");
-    e = QRegExp("бэ"); res = res.replace(e,"べ");
-    e = QRegExp("бо"); res = res.replace(e,"ぼ");
+    e = QRegExp("ха"); res.replace(e,"は");
+    e = QRegExp("хи"); res.replace(e,"ひ");
+    e = QRegExp("фу"); res.replace(e,"ふ");
+    e = QRegExp("хэ"); res.replace(e,"へ");
+    e = QRegExp("хо"); res.replace(e,"ほ");
 
-    e = QRegExp("па"); res = res.replace(e,"ぱ");
-    e = QRegExp("пи"); res = res.replace(e,"ぴ");
-    e = QRegExp("пу"); res = res.replace(e,"ぷ");
-    e = QRegExp("пэ"); res = res.replace(e,"ぺ");
-    e = QRegExp("по"); res = res.replace(e,"ぽ");
+    e = QRegExp("ба"); res.replace(e,"ば");
+    e = QRegExp("би"); res.replace(e,"び");
+    e = QRegExp("бу"); res.replace(e,"ぶ");
+    e = QRegExp("бэ"); res.replace(e,"べ");
+    e = QRegExp("бо"); res.replace(e,"ぼ");
 
-    e = QRegExp("ма"); res = res.replace(e,"ま");
-    e = QRegExp("ми"); res = res.replace(e,"み");
-    e = QRegExp("му"); res = res.replace(e,"む");
-    e = QRegExp("мэ"); res = res.replace(e,"め");
-    e = QRegExp("мо"); res = res.replace(e,"も");
+    e = QRegExp("па"); res.replace(e,"ぱ");
+    e = QRegExp("пи"); res.replace(e,"ぴ");
+    e = QRegExp("пу"); res.replace(e,"ぷ");
+    e = QRegExp("пэ"); res.replace(e,"ぺ");
+    e = QRegExp("по"); res.replace(e,"ぽ");
 
-    e = QRegExp("ра"); res = res.replace(e,"ら");
-    e = QRegExp("ри"); res = res.replace(e,"り");
-    e = QRegExp("ру"); res = res.replace(e,"る");
-    e = QRegExp("рэ"); res = res.replace(e,"れ");
-    e = QRegExp("ро"); res = res.replace(e,"ろ");
+    e = QRegExp("ма"); res.replace(e,"ま");
+    e = QRegExp("ми"); res.replace(e,"み");
+    e = QRegExp("му"); res.replace(e,"む");
+    e = QRegExp("мэ"); res.replace(e,"め");
+    e = QRegExp("мо"); res.replace(e,"も");
 
-    e = QRegExp("кя"); res = res.replace(e,"きゃ");
-    e = QRegExp("кю"); res = res.replace(e,"きゅ");
-    e = QRegExp("кё"); res = res.replace(e,"きょ");
+    e = QRegExp("ра"); res.replace(e,"ら");
+    e = QRegExp("ри"); res.replace(e,"り");
+    e = QRegExp("ру"); res.replace(e,"る");
+    e = QRegExp("рэ"); res.replace(e,"れ");
+    e = QRegExp("ро"); res.replace(e,"ろ");
 
-    e = QRegExp("ся"); res = res.replace(e,"しゃ");
-    e = QRegExp("сю"); res = res.replace(e,"しゅ");
-    e = QRegExp("сё"); res = res.replace(e,"しょ");
+    e = QRegExp("кя"); res.replace(e,"きゃ");
+    e = QRegExp("кю"); res.replace(e,"きゅ");
+    e = QRegExp("кё"); res.replace(e,"きょ");
 
-    e = QRegExp("дзя"); res = res.replace(e,"じゃ");
-    e = QRegExp("дзю"); res = res.replace(e,"じゅ");
-    e = QRegExp("дзё"); res = res.replace(e,"じょ");
+    e = QRegExp("ся"); res.replace(e,"しゃ");
+    e = QRegExp("сю"); res.replace(e,"しゅ");
+    e = QRegExp("сё"); res.replace(e,"しょ");
 
-    e = QRegExp("тя"); res = res.replace(e,"ちゃ");
-    e = QRegExp("тю"); res = res.replace(e,"ちゅ");
-    e = QRegExp("тё"); res = res.replace(e,"ちょ");
+    e = QRegExp("дзя"); res.replace(e,"じゃ");
+    e = QRegExp("дзю"); res.replace(e,"じゅ");
+    e = QRegExp("дзё"); res.replace(e,"じょ");
 
-    e = QRegExp("ня"); res = res.replace(e,"にゃ");
-    e = QRegExp("ню"); res = res.replace(e,"にゅ");
-    e = QRegExp("нё"); res = res.replace(e,"にょ");
+    e = QRegExp("тя"); res.replace(e,"ちゃ");
+    e = QRegExp("тю"); res.replace(e,"ちゅ");
+    e = QRegExp("тё"); res.replace(e,"ちょ");
 
-    e = QRegExp("хя"); res = res.replace(e,"ひゃ");
-    e = QRegExp("хю"); res = res.replace(e,"ひゅ");
-    e = QRegExp("хё"); res = res.replace(e,"ひょ");
+    e = QRegExp("ня"); res.replace(e,"にゃ");
+    e = QRegExp("ню"); res.replace(e,"にゅ");
+    e = QRegExp("нё"); res.replace(e,"にょ");
 
-    e = QRegExp("бя"); res = res.replace(e,"びゃ");
-    e = QRegExp("бю"); res = res.replace(e,"びゅ");
-    e = QRegExp("бё"); res = res.replace(e,"びょ");
+    e = QRegExp("хя"); res.replace(e,"ひゃ");
+    e = QRegExp("хю"); res.replace(e,"ひゅ");
+    e = QRegExp("хё"); res.replace(e,"ひょ");
 
-    e = QRegExp("пя"); res = res.replace(e,"ぴゃ");
-    e = QRegExp("пю"); res = res.replace(e,"ぴゅ");
-    e = QRegExp("пё"); res = res.replace(e,"ぴょ");
+    e = QRegExp("бя"); res.replace(e,"びゃ");
+    e = QRegExp("бю"); res.replace(e,"びゅ");
+    e = QRegExp("бё"); res.replace(e,"びょ");
 
-    e = QRegExp("мя"); res = res.replace(e,"みゃ");
-    e = QRegExp("мю"); res = res.replace(e,"みゅ");
-    e = QRegExp("мё"); res = res.replace(e,"みょ");
+    e = QRegExp("пя"); res.replace(e,"ぴゃ");
+    e = QRegExp("пю"); res.replace(e,"ぴゅ");
+    e = QRegExp("пё"); res.replace(e,"ぴょ");
 
-    e = QRegExp("ря"); res = res.replace(e,"りゃ");
-    e = QRegExp("рю"); res = res.replace(e,"りゅ");
-    e = QRegExp("рё"); res = res.replace(e,"りょ");
+    e = QRegExp("мя"); res.replace(e,"みゃ");
+    e = QRegExp("мю"); res.replace(e,"みゅ");
+    e = QRegExp("мё"); res.replace(e,"みょ");
 
-    e = QRegExp("а"); res = res.replace(e,"あ");
-    e = QRegExp("и"); res = res.replace(e,"い");
-    e = QRegExp("у"); res = res.replace(e,"う");
-    e = QRegExp("э"); res = res.replace(e,"え");
-    e = QRegExp("о"); res = res.replace(e,"お");
+    e = QRegExp("ря"); res.replace(e,"りゃ");
+    e = QRegExp("рю"); res.replace(e,"りゅ");
+    e = QRegExp("рё"); res.replace(e,"りょ");
 
-    e = QRegExp("нъ"); res = res.replace(e,"ん");
-    e = QRegExp("н"); res = res.replace(e,"ん");
+    e = QRegExp("а"); res.replace(e,"あ");
+    e = QRegExp("и"); res.replace(e,"い");
+    e = QRegExp("у"); res.replace(e,"う");
+    e = QRegExp("э"); res.replace(e,"え");
+    e = QRegExp("о"); res.replace(e,"お");
+
+    e = QRegExp("нъ"); res.replace(e,"ん");
+    e = QRegExp("н"); res.replace(e,"ん");
 
 
     return res;
@@ -162,7 +168,8 @@ void sqliteSearcher::search()
 
     qDebug() << "Got request: " << request;
 
-    QString query = "SELECT a.aText FROM article a JOIN "
+    QString query = "SELECT kanji, kana, transcription, a.aText "
+            "FROM article a JOIN "
             "jaWordArticle jwa ON a.id = jwa.articleId "
             "JOIN jaWord j ON jwa.jaWordId = j.id "
             "WHERE j.kana=\"%1\"";
@@ -175,12 +182,20 @@ void sqliteSearcher::search()
     }
 
     QSqlRecord sqlRecord = sqlQuery.record();
-    QString text;
+    QString text, kana, kanji, transcription;
 
     while (sqlQuery.next()) {
+        kanji = sqlQuery.value(sqlRecord.indexOf("kanji")).toString();
+        kana = sqlQuery.value(sqlRecord.indexOf("kana")).toString();
+        transcription = sqlQuery.value(sqlRecord.indexOf("transcription")).toString();
         text = sqlQuery.value(sqlRecord.indexOf("aText")).toString();
-        qDebug() << text;
-        display->setText(text);
+        QRegExp e(";"); text.replace(e, "<br />");
+
+        QString disp = "%1 [%2] "
+                "<font color=\"grey\" size=\"3\">"
+                "<i>%3</i></font>: %4";
+        disp = disp.arg(kanji, kana, transcription, text);
+        display->setHtml(disp);
     }
 
 }
