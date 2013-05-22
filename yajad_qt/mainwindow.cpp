@@ -13,8 +13,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->searchButton, SIGNAL(clicked()),
             this->sqliteSearch, SLOT(search()));
 
-    connect(ui->checkBox, SIGNAL(toggled(bool)),
+    connect(ui->radioButton, SIGNAL(toggled(bool)),
+            this->sqliteSearch, SLOT(setJapanese(bool)));
+
+    connect(ui->radioButton_2, SIGNAL(toggled(bool)),
             this->sqliteSearch, SLOT(setRussian(bool)));
+
+    connect(ui->radioButton_3, SIGNAL(toggled(bool)),
+            this->sqliteSearch, SLOT(setTranslation(bool)));
 
     connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
 

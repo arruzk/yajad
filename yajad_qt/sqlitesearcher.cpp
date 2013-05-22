@@ -3,7 +3,7 @@
 sqliteSearcher::sqliteSearcher(QObject *parent) :
     QObject(parent)
 {
-    russian = false;
+    queryType = 0;
     dbManager = new databaseManager();
     if(!dbManager->openDB(QString("../parser/dict.sqlite"))) {
         qDebug() << "Cannot open database: " << dbManager->lastError();
@@ -20,9 +20,19 @@ void sqliteSearcher::setDisplayWidget(QTextBrowser *newDisplay)
     this->display = newDisplay;
 }
 
-void sqliteSearcher::setRussian(bool ru)
+void sqliteSearcher::setRussian(bool f)
 {
-    this->russian = ru;
+    if(f) this->queryType = 1;
+}
+
+void sqliteSearcher::setJapanese(bool f)
+{
+    if(f) this->queryType = 0;
+}
+
+void sqliteSearcher::setTranslation(bool f)
+{
+    if(f) this->queryType = 2;
 }
 
 QString sqliteSearcher::convertToKana(QString req)
@@ -163,18 +173,24 @@ QString sqliteSearcher::convertToKana(QString req)
 void sqliteSearcher::search()
 {
     QString request = this->source->text();
+    QString query = "";
+    if (queryType == 2) {
+        query = "SELECT kanji, kana, transcription, a.aText "
+                "FROM article a JOIN "
+                "jaWordArticle jwa ON a.id = jwa.articleId "
+                "JOIN jaWord j ON jwa.jaWordId = j.id "
+                "WHERE a.aText LIKE \"%%1%\"";
+        query = query.arg(request);
+    } else {
+        if (queryType == 1) request = convertToKana(request);
 
-    if (russian) request = convertToKana(request);
-
-    qDebug() << "Got request: " << request;
-
-    QString query = "SELECT kanji, kana, transcription, a.aText "
-            "FROM article a JOIN "
-            "jaWordArticle jwa ON a.id = jwa.articleId "
-            "JOIN jaWord j ON jwa.jaWordId = j.id "
-            "WHERE j.kana=\"%1\"";
-    query = query.arg(request);
-    qDebug() << "Query: " << query;
+        query = "SELECT kanji, kana, transcription, a.aText "
+                "FROM article a JOIN "
+                "jaWordArticle jwa ON a.id = jwa.articleId "
+                "JOIN jaWord j ON jwa.jaWordId = j.id "
+                "WHERE j.kana LIKE \"%%1%\"";
+        query = query.arg(request);
+    }
 
     QSqlQuery sqlQuery;
     if (!sqlQuery.exec(query)) {
@@ -182,7 +198,7 @@ void sqliteSearcher::search()
     }
 
     QSqlRecord sqlRecord = sqlQuery.record();
-    QString text, kana, kanji, transcription;
+    QString text, kana, kanji, transcription, accum = "";
 
     while (sqlQuery.next()) {
         kanji = sqlQuery.value(sqlRecord.indexOf("kanji")).toString();
@@ -195,7 +211,7 @@ void sqliteSearcher::search()
                 "<font color=\"grey\" size=\"3\">"
                 "<i>%3</i></font>: %4";
         disp = disp.arg(kanji, kana, transcription, text);
-        display->setHtml(disp);
+        accum = accum + disp + "<br /><br />";
     }
-
+    display->setHtml(accum);
 }

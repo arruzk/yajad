@@ -20,7 +20,7 @@ private:
     QLineEdit *source;
     QTextBrowser *display;
     databaseManager *dbManager;
-    bool russian;
+    int queryType;
 
 public:
     explicit sqliteSearcher(QObject *parent = 0);
@@ -31,7 +31,9 @@ signals:
     
 public slots:
     void search();
-    void setRussian(bool ru);
+    void setRussian(bool f);
+    void setJapanese(bool f);
+    void setTranslation(bool f);
 };
 
 #endif // SQLITESEARCHER_HPP

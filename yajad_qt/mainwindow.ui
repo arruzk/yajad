@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>374</width>
+    <width>319</width>
     <height>553</height>
    </rect>
   </property>
@@ -20,25 +20,55 @@
     </property>
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="radioButton">
+        <property name="text">
+         <string>ja</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="text">
+         <string>ru</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QRadioButton" name="radioButton_3">
+        <property name="text">
+         <string>translation</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="4">
        <widget class="QLineEdit" name="lineEdit"/>
       </item>
-      <item row="0" column="2">
+      <item row="0" column="4">
        <widget class="QPushButton" name="searchButton">
         <property name="text">
          <string>Search</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" colspan="3">
+      <item row="4" column="0" colspan="5">
        <widget class="QTextBrowser" name="textBrowser"/>
       </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>ru</string>
+      <item row="2" column="3">
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-       </widget>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -49,7 +79,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>374</width>
+     <width>319</width>
      <height>25</height>
     </rect>
    </property>
