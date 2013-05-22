@@ -147,8 +147,9 @@ QString sqliteSearcher::convertToKana(QString req)
     e = QRegExp("э"); res = res.replace(e,"え");
     e = QRegExp("о"); res = res.replace(e,"お");
 
-    e = QRegExp("н"); res = res.replace(e,"нъ");
     e = QRegExp("нъ"); res = res.replace(e,"ん");
+    e = QRegExp("н"); res = res.replace(e,"ん");
+
 
     return res;
 }
