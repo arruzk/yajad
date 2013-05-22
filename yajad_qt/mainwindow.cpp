@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->searchButton, SIGNAL(clicked()),
             this->sqliteSearch, SLOT(search()));
 
+    connect(ui->checkBox, SIGNAL(toggled(bool)),
+            this->sqliteSearch, SLOT(setRussian(bool)));
+
     connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
 
     openRadicalWindow();

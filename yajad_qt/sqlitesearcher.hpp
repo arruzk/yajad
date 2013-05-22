@@ -7,6 +7,7 @@
 #include <QTextBrowser>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QRegExp>
 
 #include "databasemanager.hpp"
 
@@ -19,15 +20,18 @@ private:
     QLineEdit *source;
     QTextBrowser *display;
     databaseManager *dbManager;
+    bool russian;
 
 public:
     explicit sqliteSearcher(QObject *parent = 0);
     void setSourceWidget(QLineEdit *newSource);
     void setDisplayWidget(QTextBrowser *newDisplay);
+    static QString convertToKana(QString req);
 signals:
     
 public slots:
     void search();
+    void setRussian(bool ru);
 };
 
 #endif // SQLITESEARCHER_HPP
