@@ -54,27 +54,25 @@ void radical::radicalSelect(){
 
 void radical::updateRadical(){
     QSqlQuery my_query;
+    QStringList kanjiInList;
+    foreach(const int &curKanjiItem, availableKanji)
+        kanjiInList<<QString::number(curKanjiItem);
+
+    QString finalKanjiList = kanjiInList.join(QString(","));
     availableRadicals.clear();
-    foreach (const int &curRadicalId, inputRadical){
-        QString query = QString("SELECT DISTINCT HR2.radical_id AS myRadical FROM radical R "
-                                "JOIN kanjiRadical HR1 ON R.id = HR1.radical_id "
-                                "JOIN kanji H ON H.id = HR1.kanji_id "
-                                "JOIN kanjiRadical HR2 ON HR2.kanji_id = H.id WHERE R.id = %1")
-                                  .arg(curRadicalId);
+    if(!finalKanjiList.isEmpty()){
+        QString query = QString("SELECT DISTINCT KR.radical_id AS myRadical FROM kanji K "
+                                "JOIN kanjiRadical KR ON K.id = KR.kanji_id "
+                                "WHERE K.id IN(%1)")
+                                  .arg(finalKanjiList);
         if(!my_query.exec(query))
             qDebug()<<"error"<< my_query.lastError().databaseText();
         QSqlRecord rec = my_query.record();
         int id;
-        QSet<int> temp;
         while(my_query.next()){
             id = my_query.value(rec.indexOf("myRadical")).toInt();
-            temp.insert(id);
+            availableRadicals.insert(id);
         }
-        qDebug()<<temp;
-        if(availableRadicals.isEmpty())
-            availableRadicals = temp;
-        else
-            availableRadicals.intersect(temp);
     }
     clearColor();
     foreach(const int &highlight, availableRadicals){
@@ -87,7 +85,7 @@ void radical::updateRadical(){
 
 void radical::updateKanji(){
     QSqlQuery my_query;
-    QHash<int, QString> hieroglyphs;
+    QHash<int, QString> kanji;
     availableKanji.clear();
     foreach (const int &curRadicalId, inputRadical){
         QString query = QString("SELECT H.id, H.character FROM radical R "
@@ -101,7 +99,7 @@ void radical::updateKanji(){
         int id;
         while (my_query.next()) {
             id = my_query.value(rec.indexOf("id")).toInt();
-            hieroglyphs[id] = my_query.value(rec.indexOf("character")).toString();
+            kanji[id] = my_query.value(rec.indexOf("character")).toString();
             temp<<id;
         }
         if(availableKanji.isEmpty())
@@ -111,7 +109,7 @@ void radical::updateKanji(){
     }
     QStringList zz;
     foreach(const int &tt, availableKanji){
-        zz<<hieroglyphs[tt];
+        zz<<kanji[tt];
     }
     ui->textEdit->setPlainText(zz.join(QString(" ")));
     updateRadical();
