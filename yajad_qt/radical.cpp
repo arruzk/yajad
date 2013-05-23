@@ -41,6 +41,7 @@ int radical::initRadicalList(){
             column = 0;
         }
     }
+    return 0;
 }
 
 void radical::radicalSelect(){
