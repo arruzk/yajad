@@ -40,9 +40,6 @@ QString sqliteSearcher::convertToKana(QString req)
     QString res = req;
     QRegExp e;
 
-    e = QRegExp("мп");
-    qDebug() << "Index in:" << e.indexIn(res);
-
     e = QRegExp("мм"); res.replace(e,"нм");
     e = QRegExp("мп"); res.replace(e,"нп");
     e = QRegExp("мб"); res.replace(e,"нб");
@@ -163,9 +160,14 @@ QString sqliteSearcher::convertToKana(QString req)
     e = QRegExp("э"); res.replace(e,"え");
     e = QRegExp("о"); res.replace(e,"お");
 
+    e = QRegExp("я"); res.replace(e,"や");
+    e = QRegExp("ю"); res.replace(e,"ゆ");
+    e = QRegExp("ё"); res.replace(e,"よ");
+
     e = QRegExp("нъ"); res.replace(e,"ん");
     e = QRegExp("н"); res.replace(e,"ん");
 
+    qDebug() << "String converted into "  << res;
 
     return res;
 }
