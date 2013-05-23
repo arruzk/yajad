@@ -212,9 +212,9 @@ void sqliteSearcher::search()
         text = sqlQuery.value(sqlRecord.indexOf("aText")).toString();
         QRegExp e(";"); text.replace(e, "<br />");
 
-        QString disp = "<font size=\"5\">%1</font> [%2]<br />"
+        QString disp = "<font size=\"5\">%1</font> [%2]"
                 "<font color=\"grey\" size=\"3\">"
-                "<i>%3</i></font>: %4";
+                "<i>%3</i></font>:<br /> %4";
         disp = disp.arg(kanji, kana, transcription, text);
         accum = accum + disp + "<br /><br />";
     }
