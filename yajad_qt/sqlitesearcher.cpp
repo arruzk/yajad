@@ -154,11 +154,14 @@ QString sqliteSearcher::convertToKana(QString req)
     e = QRegExp("рю"); res.replace(e,"りゅ");
     e = QRegExp("рё"); res.replace(e,"りょ");
 
+    e = QRegExp("ва"); res.replace(e,"わ");
+
     e = QRegExp("а"); res.replace(e,"あ");
     e = QRegExp("и"); res.replace(e,"い");
     e = QRegExp("у"); res.replace(e,"う");
     e = QRegExp("э"); res.replace(e,"え");
     e = QRegExp("о"); res.replace(e,"お");
+    e = QRegExp("й"); res.replace(e,"い");
 
     e = QRegExp("я"); res.replace(e,"や");
     e = QRegExp("ю"); res.replace(e,"ゆ");
@@ -209,7 +212,7 @@ void sqliteSearcher::search()
         text = sqlQuery.value(sqlRecord.indexOf("aText")).toString();
         QRegExp e(";"); text.replace(e, "<br />");
 
-        QString disp = "%1 [%2] "
+        QString disp = "<font size=\"5\">%1</font> [%2]<br />"
                 "<font color=\"grey\" size=\"3\">"
                 "<i>%3</i></font>: %4";
         disp = disp.arg(kanji, kana, transcription, text);
