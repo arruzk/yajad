@@ -188,7 +188,7 @@ void sqliteSearcher::search()
         query = query.arg(request);
     } else {
         if (queryType == 1) request = convertToKana(request);
-
+        source->setText(request);
         query = "SELECT kanji, kana, transcription, a.aText "
                 "FROM article a JOIN "
                 "jaWordArticle jwa ON a.id = jwa.articleId "
