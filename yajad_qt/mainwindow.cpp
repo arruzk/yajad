@@ -22,7 +22,12 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->radioButton_3, SIGNAL(toggled(bool)),
             this->sqliteSearch, SLOT(setTranslation(bool)));
 
-    connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
+    connect(ui->lineEdit, SIGNAL(returnPressed()),
+            this->sqliteSearch, SLOT(search()));
+
+    //connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
+
+
 
     openRadicalWindow();
 }
