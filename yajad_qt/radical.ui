@@ -20,20 +20,35 @@
       <widget class="QLineEdit" name="lineEdit"/>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="sendMainButton">
        <property name="text">
-        <string>PushButton</string>
+        <string>OK</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QTextEdit" name="textEdit"/>
-     </item>
-    </layout>
+    <widget class="QScrollArea" name="kanjiArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>513</width>
+        <height>240</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <layout class="QGridLayout" name="kanjiLayout"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton_2">

@@ -7,12 +7,18 @@ radical::radical(QWidget *parent) :
 {
     ui->setupUi(this);
     initRadicalList();
-    connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearKanjiList()));
+    connect(ui->pushButton_2, SIGNAL(clicked()), SLOT(clearRadicalList()));
+    connect(ui->sendMainButton, SIGNAL(clicked()), SLOT(sendButtonClick()));
 }
 
 radical::~radical()
 {
     delete ui;
+}
+
+void radical::sendButtonClick(){
+    emit sendToMainWondow(ui->lineEdit->text());
+    ui->lineEdit->clear();
 }
 
 int radical::initRadicalList(){
@@ -50,6 +56,12 @@ void radical::radicalSelect(){
     inputRadical<<radicalId;
     curButton->setDisabled(true);
     updateKanji();
+}
+
+void radical::moveChar(){
+    QPushButton *curButton = qobject_cast<QPushButton *>(QObject::sender());
+    ui->lineEdit->insert(curButton->text());
+    clearRadicalList();
 }
 
 void radical::updateRadical(){
@@ -107,16 +119,27 @@ void radical::updateKanji(){
         else
             availableKanji.intersect(temp);
     }
-    QStringList zz;
+    clearKanjiList();
+    int r=0,c=0;
+    QPushButton *kanjiButtonTemp;
     foreach(const int &tt, availableKanji){
-        zz<<kanji[tt];
+        kanjiButtonTemp = new QPushButton(kanji[tt]);
+        kanjiButtonTemp->setMinimumWidth(5);
+        connect(kanjiButtonTemp, SIGNAL(clicked()), SLOT(moveChar()));
+        ui->kanjiLayout->addWidget(kanjiButtonTemp,r,c);
+        c++;
+        if(c%10 == 0){
+            c = 0;
+            r++;
+        }
     }
-    ui->textEdit->setPlainText(zz.join(QString(" ")));
+    //ui->textEdit->setPlainText(zz.join(QString(" ")));
     updateRadical();
 }
 
-void radical::clearKanjiList(){
+void radical::clearRadicalList(){
     inputRadical.clear();
+    clearKanjiList();
     foreach(QPushButton *curButton, radicals){
         curButton->setDisabled(false);
     }
@@ -126,5 +149,13 @@ void radical::clearKanjiList(){
 void radical::clearColor(){
     foreach(QPushButton *curButton, radicals){
         curButton->setAutoFillBackground(false);
+    }
+}
+
+void radical::clearKanjiList(){
+    QLayoutItem *child;
+    while ( (child = ui->kanjiLayout->takeAt(0)) != 0) {
+        delete child->widget();
+        delete child;
     }
 }

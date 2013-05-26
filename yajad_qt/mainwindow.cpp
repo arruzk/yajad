@@ -25,11 +25,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->lineEdit, SIGNAL(returnPressed()),
             this->sqliteSearch, SLOT(search()));
 
-    //connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
-
-
-
-    openRadicalWindow();
+    connect(ui->actionOpen, SIGNAL(triggered()), SLOT(openRadicalWindow()));
 }
 
 MainWindow::~MainWindow()
@@ -40,4 +36,9 @@ MainWindow::~MainWindow()
 void MainWindow::openRadicalWindow(){
     radicalWindow = new radical();
     radicalWindow->show();
+    connect(radicalWindow, SIGNAL(sendToMainWondow(QString)), SLOT(getWordFromRadicalWindow(QString)));
+}
+
+void MainWindow::getWordFromRadicalWindow(QString word){
+    ui->lineEdit->setText(word);
 }

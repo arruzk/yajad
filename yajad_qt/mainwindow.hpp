@@ -18,6 +18,8 @@ public:
     ~MainWindow();
 private slots:
     void openRadicalWindow();
+public slots:
+    void getWordFromRadicalWindow(QString );
 private:
     Ui::MainWindow *ui;
     sqliteSearcher *sqliteSearch;

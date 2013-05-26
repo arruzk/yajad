@@ -32,8 +32,13 @@ private:
 public slots:
     void clearKanjiList();
     void clearColor();
+    void clearRadicalList();
+    void moveChar();
+    void sendButtonClick();
 private slots:
     void radicalSelect();
+signals:
+    void sendToMainWondow(QString word);
 };
 
 #endif // RADICAL_H
