@@ -196,7 +196,6 @@ void sqliteSearcher::search()
                 "WHERE j.kana LIKE \"%%1%\" OR "
                 "j.kanji LIKE \"%%1%\"";
         query = query.arg(request);
-        qDebug()<<"Query is "<<query;
     }
 
     QSqlQuery sqlQuery;
