@@ -193,8 +193,10 @@ void sqliteSearcher::search()
                 "FROM article a JOIN "
                 "jaWordArticle jwa ON a.id = jwa.articleId "
                 "JOIN jaWord j ON jwa.jaWordId = j.id "
-                "WHERE j.kana LIKE \"%%1%\"";
+                "WHERE j.kana LIKE \"%%1%\" OR "
+                "j.kanji LIKE \"%%1%\"";
         query = query.arg(request);
+        qDebug()<<"Query is "<<query;
     }
 
     QSqlQuery sqlQuery;
