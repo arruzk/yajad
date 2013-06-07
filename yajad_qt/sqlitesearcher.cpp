@@ -170,7 +170,7 @@ QString sqliteSearcher::convertToKana(QString req)
     e = QRegExp("нъ"); res.replace(e,"ん");
     e = QRegExp("н"); res.replace(e,"ん");
 
-    qDebug() << "String converted into "  << res;
+    qDebug() << "String converted into"  << res;
 
     return res;
 }
@@ -179,22 +179,25 @@ void sqliteSearcher::search()
 {
     QString request = this->source->text();
     QString query = "";
-    if (queryType == 2) {
+    if (queryType == 2) { // russian word
         query = "SELECT kanji, kana, transcription, a.aText "
                 "FROM article a JOIN "
                 "jaWordArticle jwa ON a.id = jwa.articleId "
                 "JOIN jaWord j ON jwa.jaWordId = j.id "
-                "WHERE a.aText LIKE \"%%1%\"";
+                "WHERE a.aText LIKE \"%1\" OR "
+                "a.aText LIKE \"% %1 %\" OR "
+                "a.aText LIKE \"%1 %\" OR "
+                "a.aText LIKE \"% %1\"";
         query = query.arg(request);
-    } else {
+    } else { // kanji or kana or translit search
         if (queryType == 1) request = convertToKana(request);
         source->setText(request);
         query = "SELECT kanji, kana, transcription, a.aText "
                 "FROM article a JOIN "
                 "jaWordArticle jwa ON a.id = jwa.articleId "
                 "JOIN jaWord j ON jwa.jaWordId = j.id "
-                "WHERE j.kana LIKE \"%%1%\" OR "
-                "j.kanji LIKE \"%%1%\"";
+                "WHERE j.kana LIKE \"%1%\" OR "
+                "j.kanji LIKE \"%1%\" ORDER BY a.id";
         query = query.arg(request);
     }
 
